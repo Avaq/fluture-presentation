@@ -1,0 +1,36 @@
+{
+  "name": "fpjs",
+  "version": "0.1.0",
+  "description": "Presentation about functional programming",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "lint": "eslint src",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+  },
+  "author": "Aldwin Vlasblom <aldwin.vlasblom@gmail.com> (https://github.com/Avaq)",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.4.5",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "ramda": "^0.19.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "sanctuary": "^0.8.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.1.8",
+    "babel-loader": "^6.2.2",
+    "babel-plugin-syntax-jsx": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "eslint": "^2.0.0-rc.0",
+    "eslint-config-standard-react": "^2.2.0",
+    "eslint-plugin-react": "^3.16.1",
+    "html-webpack-plugin": "^2.8.1",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
