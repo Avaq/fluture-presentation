@@ -298,8 +298,18 @@ export default () =>
     <Card background={GREY2}>
       <h1>Questions?</h1>
       <h3><a href="mailto:aldwin.vlasblom@gmail.com">Email me</a> if you do want to talk</h3>
-      <h3>You can look at and play with the slides on <a href="#">GitHub Pages</a></h3>
-      <h3>You can look at the source code on <a href="#">GitHub</a></h3>
+      <h3>
+        You can look at and play with the slides on: <br />
+        <a href="https://avaq.github.io/fp-presentation/build/">
+          https://avaq.github.io/fp-presentation/build/
+        </a>
+      </h3>
+      <h3>
+        You can look at the source code on: <br />
+        <a href="https://github.com/Avaq/fp-presentation">
+          https://github.com/Avaq/fp-presentation
+        </a>
+      </h3>
     </Card>
 
   </Deck>
