@@ -296,8 +296,25 @@ export default () =>
     </Card>
 
     <Card background={GREY2}>
+      <h1>Libraries</h1>
+      <h3><a href="http://ramdajs.com/">RamdaJS</a> - Alternative to Lodash</h3>
+      <h3><a href="http://sanctuary.js.org/">Sanctuary</a> - Hardcore Ramda</h3>
+      <h3><a href="https://evilcorp.limited/date-fp/">date-fp</a> - Alternative to MomentJS</h3>
+      <h3><a href="https://github.com/Avaq/Fluture">Fluture</a> - Alternative to Promises</h3>
+    </Card>
+
+    <Card background={GREY2}>
+      <h1>Resources</h1>
+      <h2>In order of recommended consumpsion</h2>
+      <h3><a href="https://www.youtube.com/watch?v=m3svKOdZijA">Underscore you're doing it wrong</a> - Why to use Ramda</h3>
+      <h3><a href="https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84">FunFunFunction</a> - A video series about FP in JS</h3>
+      <h3><a href="https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84">Mostly Adequate Guide</a> - Book about FP in JS</h3>
+      <h3><a href="https://vimeo.com/user7981506/videos">Monad a Day</a> - Video series about Monads</h3>
+      <h3><a href="https://www.youtube.com/watch?v=h_tkIpwbsxY">Classroom Coding</a> - Video series about a practical application of Monads</h3>
+    </Card>
+
+    <Card background={GREY2}>
       <h1>Questions?</h1>
-      <h3><a href="mailto:aldwin.vlasblom@gmail.com">Email me</a> if you do want to talk</h3>
       <h3>
         You can look at and play with the slides on: <br />
         <a href="https://avaq.github.io/fp-presentation/build/">
