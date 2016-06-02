@@ -85,13 +85,16 @@ const Repl = createClass({
   },
 
   doCompile(){
-    this.setState(getCompilationResults(this.onLog)(this.state.input))
+    this.setState({
+      logs: [],
+      ...getCompilationResults(this.onLog)(this.state.input)
+    })
   },
 
   onLog(x){
     setTimeout(() => {
       this.setState({
-        logs: this.state.logs.concat([x]).slice(-3)
+        logs: this.state.logs.concat([x])
       });
     }, 10);
   },
