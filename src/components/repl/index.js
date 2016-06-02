@@ -21,8 +21,9 @@ const CodeMirror = createFactory(ReactCodeMirror);
 const babelTransform = flip(encaseEither2(I, bind(Babel.transform, Babel)));
 
 //evaluate :: String -> Either Error String
-const evaluate = compose(map(toString), x => {
+const evaluate = log => compose(map(toString), x => {
   try{
+    var Future = require('fluture');
     return Right(eval(x));
   }
   catch(e){
@@ -36,13 +37,13 @@ const compile = babelTransform({
 });
 
 //getCompilationResults :: String -> {error: Error|null, compiled: String|null, output: String|null}
-const getCompilationResults = pipe([
+const getCompilationResults = onLog => pipe([
   compile,
   map(get(String, 'code')),
   chain(maybeToEither(new Error('Cannot compile'))),
   map(replace(/['"]use strict['"];\n*/, '')),
   eitherCompiled => {
-    const eitherEvaluated = eitherCompiled.chain(evaluate);
+    const eitherEvaluated = eitherCompiled.chain(evaluate(onLog));
     return {
       error: either(I, K(null), eitherEvaluated),
       compiled: either(K(null), I, eitherCompiled),
@@ -68,21 +69,30 @@ const Repl = createClass({
   getInitialState(){
     return {
       input: this.props.value || '',
-      ...getCompilationResults(this.props.value || '')
+      logs: [],
+      ...getCompilationResults(this.onLog)(this.props.value || '')
     }
   },
 
   onChange(e){
     this.setState({
       input: e.target.value,
-      ...getCompilationResults(e.target.value)
+      ...getCompilationResults(this.onLog)(e.target.value)
     });
+  },
+
+  onLog(x){
+    setTimeout(() => {
+      this.setState({
+        logs: this.state.logs.concat([x]).slice(-3)
+      });
+    }, 10);
   },
 
   componentWillReceiveProps(props){
     this.setState({
       input: props.value || '',
-      ...getCompilationResults(props.value || '')
+      ...getCompilationResults(this.onLog)(props.value || '')
     })
   },
 
@@ -109,6 +119,9 @@ const Repl = createClass({
         ? <pre style={style.error}>{this.state.error.message}</pre>
         : <pre style={style.output}>&gt; {this.state.output}</pre>
       }
+      <pre style={style.logs}>
+        {this.state.logs.reverse().map((x, i) => `${i+1}> ${x}`).join('\n')}
+      </pre>
     </div>
   }
 

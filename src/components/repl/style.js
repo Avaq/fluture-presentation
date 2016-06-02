@@ -34,6 +34,10 @@ export default () => ({
     ...output,
     color: 'red'
   },
+  logs: {
+    ...output,
+    color: 'grey'
+  },
   textArea: {
     minHeight: '15em'
   }
