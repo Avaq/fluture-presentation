@@ -14,6 +14,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
     "codemirror": "^5.11.0",
+    "debounce": "^1.0.0",
     "fluture": "^1.0.3",
     "ramda": "^0.19.1",
     "react": "^0.14.7",

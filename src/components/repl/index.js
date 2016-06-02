@@ -2,6 +2,7 @@
 
 import createStyles from './style';
 import React, {createClass, createFactory, PropTypes as T} from 'react';
+import debounce from 'debounce';
 import ReactCodeMirror from 'react-code-mirror';
 import es2015 from 'babel-preset-es2015';
 import stage0 from 'babel-preset-stage-0';
@@ -70,15 +71,21 @@ const Repl = createClass({
     return {
       input: this.props.value || '',
       logs: [],
+      timeout: -1,
       ...getCompilationResults(this.onLog)(this.props.value || '')
     }
   },
 
   onChange(e){
+    clearTimeout(this.state.timeout);
     this.setState({
       input: e.target.value,
-      ...getCompilationResults(this.onLog)(e.target.value)
+      timeout: setTimeout(this.doCompile, 250)
     });
+  },
+
+  doCompile(){
+    this.setState(getCompilationResults(this.onLog)(this.state.input))
   },
 
   onLog(x){
@@ -120,7 +127,7 @@ const Repl = createClass({
         : <pre style={style.output}>&gt; {this.state.output}</pre>
       }
       <pre style={style.logs}>
-        {this.state.logs.reverse().map((x, i) => `${i+1}> ${x}`).join('\n')}
+        {this.state.logs.join('\n')}
       </pre>
     </div>
   }
