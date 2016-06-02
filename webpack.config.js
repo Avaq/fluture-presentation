@@ -26,7 +26,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Functional Programming',
+      title: 'Into the Fluture',
       template: 'src/index.ejs',
       inject: 'body'
     })

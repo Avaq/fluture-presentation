@@ -30,7 +30,7 @@ module.exports = {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'Functional Programming',
+      title: 'Into the Fluture',
       template: 'src/index.ejs',
       inject: 'body'
     })
