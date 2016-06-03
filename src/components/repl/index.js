@@ -14,6 +14,7 @@ import {
   bind, flip, toString, map, replace, chain, either as oneOf, gte, __, reduce,
   max, length
 } from 'ramda';
+import fluture from 'fluture';
 
 //CodeMirror :: Properties -> CodeMirror
 const CodeMirror = createFactory(ReactCodeMirror);
@@ -24,7 +25,8 @@ const babelTransform = flip(encaseEither2(I, bind(Babel.transform, Babel)));
 //evaluate :: String -> Either Error String
 const evaluate = log => compose(map(toString), x => {
   try{
-    var Future = require('fluture');
+    var Future = fluture;
+    var noop = () => {};
     return Right(eval(x));
   }
   catch(e){
@@ -102,6 +104,7 @@ const Repl = createClass({
   componentWillReceiveProps(props){
     this.setState({
       input: props.value || '',
+      logs: [],
       ...getCompilationResults(this.onLog)(props.value || '')
     })
   },
@@ -130,7 +133,7 @@ const Repl = createClass({
         : <pre style={style.output}>&gt; {this.state.output}</pre>
       }
       <pre style={style.logs}>
-        {this.state.logs.join('\n')}
+        {this.state.logs.map(toString).map(x => `> ${x}`).join('\n')}
       </pre>
     </div>
   }

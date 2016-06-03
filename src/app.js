@@ -9,324 +9,233 @@ export default () =>
   <Deck>
 
     <Card background={GREY2}>
-      <h1>Functional Programming</h1>
-    </Card>
-
-    <Card background={GREY2}>
-      <h1>Functional Programming</h1>
-      <h2>Programming with functions</h2>
-    </Card>
-
-    <Card background={GREY2}>
-      <h1>The end</h1>
-      <h2>Questions?</h2>
-    </Card>
-
-    <Card background={RED}>
-      <h1>The end</h1>
-      <h2>Questions?</h2>
-      <h3>Just kidding!</h3>
-    </Card>
-
-    <Card background={RED}>
-      <h1>Warning</h1>
-      <h2>Contains code</h2>
-      <h4>Feel free to ask questions</h4>
-    </Card>
-
-    <Card background={ORANGE}>
-      <h1>Before we start</h1>
-      <h2>A quick introduction to ES2015</h2>
-      <Repl
-        value={code `
-          var inc = function inc(x) {
-            return x + 1;
-          };
-
-          inc(1);
-        `}
-      />
-    </Card>
-
-    <Card background={GREEN}>
-      <h1>So what do I <i>mean</i> by functions?</h1>
-      <h2>Like static methods, except...</h2>
-      <h3>First-class</h3>
-      <h3>Pure</h3>
-      <h3>Total</h3>
+      <h1>Into the Fluture</h1>
     </Card>
 
     <Card background={BLUE}>
-      <h1>First-class Functions</h1>
-      <h2>Functions are things</h2>
+      <h1>A brief history of async</h1>
+      <h2>Continuation passing style</h2>
+      <h4>(callbacks)</h4>
       <Repl
         value={code `
-          const one = 1
+          function myFunction(a, b){
+            return (a + b);
+          }
 
-          const inc = x => x + one
-
-          inc(one)
+          //continuation:
+          log(myFunction(1, 2))
         `}
       />
     </Card>
 
     <Card background={BLUE}>
-      <h1>You may know them as</h1>
-      <h2>Closures</h2>
-      <h2>Anonymous functions</h2>
-      <h2>Lambda's</h2>
-      <h3>(Every modern, popular language has them)</h3>
+      <h1>A brief history of async</h1>
+      <h2><a href="https://github.com/caolan/async">Async.js</a></h2>
+      <h4>(an abstraction over callbacks)</h4>
     </Card>
 
     <Card background={BLUE}>
-      <h1>Lambda's are awesome!</h1>
-      <h2>Functions can return functions</h2>
-      <Repl
-        value={code `
-          const add = a => b => a + b
-
-          const add5 = add(5)
-
-          add5(15)
-        `}
-      />
-      <h3>(This is currying)</h3>
+      <h1>A brief history of async</h1>
+      <h2><a href="https://api.jquery.com/category/deferred-object/">jQuery Deferred</a></h2>
+      <h2><a href="https://github.com/kriskowal/q">Q</a></h2>
+      <h4>(better abstractions over callbacks)</h4>
     </Card>
 
     <Card background={BLUE}>
-      <h1>Lambda's are awesome!</h1>
-      <h2>Functions can be passed to functions</h2>
+      <h1>A brief history of async</h1>
+      <h2><a href="https://promisesaplus.com/">Promises/A+</a></h2>
+      <h4>(a formalization of promises)</h4>
       <Repl
         value={code `
-          const isEqualBy = (f, a, b) => f(a) === f(b)
+          function myFunction(a, b){
+            return Promise.resolve(a + b);
+          }
 
-          isEqualBy(Math.abs, -42, +42)
-        `}
-      />
-      <h3>(This is higher order)</h3>
-    </Card>
-
-    <Card background={BLUE}>
-      <h1>Lambda's are awesome!</h1>
-      <h2>You've probably used <code>map()</code> before</h2>
-      <h3>Combining curry with higher order</h3>
-      <Repl
-        value={code `
-          const add = a => b => a + b
-
-          const data = [1, 2, 3, 4]
-
-          data.map(add(10))
+          //continuation:
+          myFunction(1, 2).then(log);
         `}
       />
     </Card>
 
     <Card background={BLUE}>
-      <h1>Lambda's are awesome!</h1>
-      <h2>We can glue functions together</h2>
-      <Repl
-        value={code `
-          const add = a => b => a + b
-          const mult = a => b => a * b
-
-          const compose = (f, g) => x => f(g(x))
-
-          const add2mult5 = compose(mult(5), add(2))
-
-          add2mult5(0)
-        `}
-      />
-      <h3>(This is composition)</h3>
-    </Card>
-
-    <Card background={BLUE}>
-      <h1>Lambda's are awesome!</h1>
-      <Repl
-        hideCompiled
-        value={code `
-          const toString = x => x.toString()
-          const toUpperCase = x => x.toUpperCase()
-          const isString = x => typeof x === 'string'
-          const append = x => xs => xs + x
-
-          const compose = f => g => x => f(g(x))
-          const ifElse = f => g => h => x => f(x) ? g(x) : h(x)
-
-
-          const shout = (compose
-                          (append('!!!'))
-                          (toUpperCase))
-
-          const shoutOrToString = ifElse
-                                    (isString)
-                                    (shout)
-                                    (toString)
-
-          shoutOrToString('hello')
-        `}
-      />
-      <h3>(This is point-free)</h3>
+      <h1>A brief history of async</h1>
+      <h2><a href="https://github.com/tj/co">Co</a></h2>
+      <h2><a href="https://tc39.github.io/ecmascript-asyncawait/">Async/Await</a></h2>
+      <h4>(abstractions over promises)</h4>
     </Card>
 
     <Card background={YELLOW}>
-      <h1>Pure functions</h1>
-      <h2>Do not mutate shared state</h2>
-      <h3>Impure:</h3>
-      <Repl
-        value={code `
-          let i = 0
-          const inc = x => i += x
-
-          inc(1)
-          inc(2)
-          inc(3)
-
-          i
-        `}
-      />
-      <h3>Purer:</h3>
-      <Repl
-        value={code `
-          const inc = (() => {
-            let i = 0
-            return x => i += x
-          })()
-
-          inc(1)
-          inc(2)
-          inc(3)
-        `}
-      />
-      <h3>Purest:</h3>
-      <Repl
-        value={code `
-          const inc = (i, x) => i + x
-
-          inc(inc(inc(0, 1), 2), 3)
-        `}
-      />
-      <h3>Purest but nice:</h3>
-      <Repl
-        value={code `
-          const id = x => x
-          const compose = (f, g) => x => f(g(x))
-          const pipe = fs => fs.reduce(compose, id)
-
-          const add = a => b => a + b
-
-          const program = pipe([
-            add(1),
-            add(2),
-            add(3)
-          ])
-
-          program(0)
-        `}
-      />
-      <h3>(Moving away from OOP)</h3>
+      <h1>But, Monads!</h1>
+      <h2>Meanwhile; mathematicians were doing maths</h2>
+      <a href="https://www.youtube.com/watch?v=hoh4TmPzu1w">
+        <img src="https://i.ytimg.com/vi/TMPPgAAmZ0M/maxresdefault.jpg" />
+      </a>
     </Card>
 
-    <Card background={GREEN}>
-      <h1>Total functions</h1>
-      <h2>Are true to their own type signature</h2>
-      <pre style={{textAlign: 'left', backgroundColor: GREY2}}>{code `
-        class MyClass {
-          private Int x = 42;
-          public Int divideBy(Int n)
-          {
-            return this.x / n;
-          }
-        }
-
-        Int answer = new MyClass().divideBy(0);
+    <Card background={YELLOW}>
+      <h1>But, Monads!</h1>
+      <h2>Particularly: Boxes</h2>
+      <h4>(containers with a value)</h4>
+      <pre>{code `
+        Array(value)            //Array is a box
+        Just(value)             //Maybe is a box
+        Observable.of(value)    //Stream is a box
+        Promise.resolve(value)  //Promise is a box
+        Future.of(value)        //Future is a box
       `}</pre>
-      <h3>The Int is a lie!</h3>
+      <h4>...and so are many more useful abstractions we use every day</h4>
     </Card>
 
-    <Card background={GREEN}>
-      <h1>Total functions</h1>
-      <h2>Do not lie</h2>
-      <h3>Fix the input:</h3>
-      <pre style={{textAlign: 'left', backgroundColor: GREY2}}>{code `
-        class MyClass {
-          private Int x = 42;
-          public Int divideBy(NonZeroInt n)
-          {
-            return this.x / n;
-          }
-        }
-      `}</pre>
-      <h4>(NonZeroInt does not include 0)</h4>
-      <h3>Fix the output:</h3>
-      <pre style={{textAlign: 'left', backgroundColor: GREY2}}>{code `
-        class MyClass {
-          private Int x = 42;
-          public Maybe<Int> divideBy(Int n)
-          {
-            if(n == 0){
-              return Nothing();
-            } else {
-              return Just(this.x / n);
-            }
-          }
-        }
-      `}</pre>
-      <h4>(Nothing and Just both inherit from Maybe)</h4>
+    <Card background={YELLOW}>
+      <h1>But, Monads!</h1>
+      <h2>There's a pattern here!</h2>
+      <img src="https://wiki.haskell.org/wikiupload/e/ee/Natural_transformation.png" />
+    </Card>
+
+    <Card background={YELLOW}>
+      <h1>But, Monads!</h1>
+      <h2>
+        <a href="https://github.com/promises-aplus/promises-spec/issues/94#issuecomment-16176966">
+          So the math people tried to tell the Promise people
+        </a>
+      </h2>
+      <h4>...and failed</h4>
     </Card>
 
     <Card background={ORANGE}>
-      <h1>Now that you know the basics</h1>
-      <h2>We can talk about</h2>
-      <h3>
-        Monads, Functors, Combinators, Transformers, Birds, Promises, Futures,
-        Eithers, Coyonas, Arity, Natural Transformations, Lambda Calculus,
-        Tacos, Isomorphisms, Lenses, Catamorphisms, Transducers, etc.
-      </h3>
-    </Card>
-
-    <Card background={ORANGE}>
-      <h1>Now that you know the basics</h1>
-      <h2>We can talk about</h2>
-      <h3>
-        Monads, Functors, Combinators, Transformers, Birds, Promises, Futures,
-        Eithers, Coyonas, Arity, Natural Transformations, Lambda Calculus,
-        Tacos, Isomorphisms, Lenses, Catamorphisms, Transducers, etc.
-      </h3>
-      <h1>But not today!</h1>
-    </Card>
-
-    <Card background={GREY2}>
-      <h1>Libraries</h1>
-      <h3><a href="http://ramdajs.com/">RamdaJS</a> - Alternative to Lodash</h3>
-      <h3><a href="http://sanctuary.js.org/">Sanctuary</a> - Hardcore Ramda</h3>
-      <h3><a href="https://evilcorp.limited/date-fp/">date-fp</a> - Alternative to MomentJS</h3>
-      <h3><a href="https://github.com/Avaq/Fluture">Fluture</a> - Alternative to Promises</h3>
-    </Card>
-
-    <Card background={GREY2}>
-      <h1>Resources</h1>
-      <h2>In order of recommended consumpsion</h2>
-      <h3><a href="https://www.youtube.com/watch?v=m3svKOdZijA">Underscore you're doing it wrong</a> - Why to use Ramda</h3>
-      <h3><a href="https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84">FunFunFunction</a> - A video series about FP in JS</h3>
-      <h3><a href="https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84">Mostly Adequate Guide</a> - Book about FP in JS</h3>
-      <h3><a href="https://vimeo.com/user7981506/videos">Monad a Day</a> - Video series about Monads</h3>
-      <h3><a href="https://www.youtube.com/watch?v=h_tkIpwbsxY">Classroom Coding</a> - Video series about a practical application of Monads</h3>
-    </Card>
-
-    <Card background={GREY2}>
-      <h1>Questions?</h1>
-      <h3>
-        You can look at and play with the slides on: <br />
-        <a href="https://avaq.github.io/fp-presentation/build/">
-          https://avaq.github.io/fp-presentation/build/
+      <h1>Fantasy Land</h1>
+      <h2>
+        <a href="https://github.com/fantasyland/fantasy-land">
+          And so the Fantasy Land specification was born
         </a>
-      </h3>
-      <h3>
-        You can look at the source code on: <br />
-        <a href="https://github.com/Avaq/fp-presentation">
-          https://github.com/Avaq/fp-presentation
-        </a>
-      </h3>
+      </h2>
+      <img src="https://raw.githubusercontent.com/fantasyland/fantasy-land/master/logo.png" />
+      <h4>A specification describing the behaviour of boxes in JavaScript</h4>
+      <br />
+      <img src="https://raw.githubusercontent.com/fantasyland/fantasy-land/master/figures/dependencies.png" />
+    </Card>
+
+    <Card background={GREEN}>
+      <h1>Fluture</h1>
+      <h2>FL + Future = Fluture</h2>
+      <Repl
+        value={code `
+          const add1 = x => x + 1;
+
+          let arr = [1];
+          let fut = Future.of(1);
+
+          arr = arr.map(add1);
+          fut = fut.map(add1);
+
+          log(arr[0]);
+          fut.value(log);
+        `}
+      />
+    </Card>
+
+    <Card background={GREEN}>
+      <h1>Fluture</h1>
+      <h2>Compared to Promises</h2>
+      <Repl
+        value={code `
+          //Promises are "eager" (immediately interpreted)
+          const p = new Promise((res, rej) => {
+            log('hello Promise');
+            res(1);
+          })
+
+          //Futures are "lazy" (if nobody needs them, they won't even run)
+          const f = Future((rej, res) => {
+            log('hello Future');
+            res(1);
+          })
+        `}
+      />
+    </Card>
+
+    <Card background={GREEN}>
+      <h1>Fluture</h1>
+      <h2>Compared to Promises</h2>
+      <Repl
+        value={code `
+          //Promises are "magical" (they make their own decisions)
+          const continuationP = _ => "Hello world"
+          const p = Promise.resolve(1).then(continuationP).then(log)
+
+          //Futures are "logical" (every function always does the same thing)
+          const continuationF = _ => "Hello world"
+          const f = Future.of(1).map(continuationP).value(log)
+        `}
+      />
+    </Card>
+
+    <Card background={GREEN}>
+      <h1>Fluture</h1>
+      <h2>Compared to Promises</h2>
+      <Repl
+        value={code `
+          //Promises always cache (cannot re-execute)
+          const p = new Promise((res, rej) => {
+            log('hello Promise');
+            res(1);
+          });
+
+          p.then(noop)
+          p.then(noop)
+
+          //Futures don't cache by default (but can be easily made to do so)
+          const f = Future((rej, res) => {
+            log('hello Future');
+            res(1);
+          });
+
+          f.value(noop)
+          f.value(noop)
+        `}
+      />
+    </Card>
+
+    <Card background={GREEN}>
+      <h1>Fluture</h1>
+      <h2>Compared to Promises</h2>
+      <Repl
+        value={code `
+          //Promises eat your errors
+          const p = new Promise((res, rej) => {
+            rej(new Error('ALLES KAPUTT CALL THE POLICE'));
+          });
+
+          p.then(log)
+
+          //Futures force you to handle every error
+          const f = Future((rej, res) => {
+            rej(new Error('ALLES KAPUTT CALL THE POLICE'));
+          });
+
+          f.value(log)
+        `}
+      />
+    </Card>
+
+    <Card background={GREEN}>
+      <h1>In summary</h1>
+
+      <h3>Promises are made-up. Abstractions have to be made specifically for them</h3>
+      <h3>Futures are boxes like any other box. Every abstraction for any box works on Futures as well</h3>
+
+      <h3>Promises are magical. They take "smart" decisions for you, like Microsoft Clippy</h3>
+      <h3>Futures are logical. They do what you tell them to do and nothing more</h3>
+
+      <h3>Promises are eager. They execute code even if they don't need to, which is terrible when you are mindful of side-effects</h3>
+      <h3>Futures are lazy. They let you decide if and when you execute them</h3>
+
+      <h3>Promises always cache. There is no way to re-execute the operation in the Promise</h3>
+      <h3>Futures can cache. They don't cache by default, but it's super easy to add it</h3>
+    </Card>
+
+    <Card>
+      <h1>I guess that was it</h1>
     </Card>
 
   </Deck>
